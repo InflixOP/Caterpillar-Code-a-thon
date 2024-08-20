@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vehicle Costing Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 500px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vehicle Costing Prediction</h1>
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="leftFrontPressure">Left Front Pressure</label>
+                <input type="number" id="leftFrontPressure" name="leftFrontPressure" required>
+            </div>
+            <div class="form-group">
+                <label for="rightFrontPressure">Right Front Pressure</label>
+                <input type="number" id="rightFrontPressure" name="rightFrontPressure" required>
+            </div>
+            <div class="form-group">
+                <label for="leftFrontCondition">Left Front Condition</label>
+                <select id="leftFrontCondition" name="leftFrontCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Needs Replacement">Needs Replacement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rightFrontCondition">Right Front Condition</label>
+                <select id="rightFrontCondition" name="rightFrontCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Needs Replacement">Needs Replacement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="leftRearPressure">Left Rear Pressure</label>
+                <input type="number" id="leftRearPressure" name="leftRearPressure" required>
+            </div>
+            <div class="form-group">
+                <label for="rightRearPressure">Right Rear Pressure</label>
+                <input type="number" id="rightRearPressure" name="rightRearPressure" required>
+            </div>
+            <div class="form-group">
+                <label for="leftRearCondition">Left Rear Condition</label>
+                <select id="leftRearCondition" name="leftRearCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Needs Replacement">Needs Replacement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rightRearCondition">Right Rear Condition</label>
+                <select id="rightRearCondition" name="rightRearCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Needs Replacement">Needs Replacement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="batteryWaterLevel">Battery Water Level</label>
+                <select id="batteryWaterLevel" name="batteryWaterLevel" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="batteryCondition">Battery Condition</label>
+                <select id="batteryCondition" name="batteryCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Damaged">Damaged</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="batteryLeak">Battery Leak</label>
+                <select id="batteryLeak" name="batteryLeak" required>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="batteryReplacementDate">Battery Replacement Date (Years)</label>
+                <input type="number" id="batteryReplacementDate" name="batteryReplacementDate" required>
+            </div>
+            <div class="form-group">
+                <label for="rustDentDamageExterior">Rust/Dent/ Damage Exterior</label>
+                <select id="rustDentDamageExterior" name="rustDentDamageExterior" required>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="oilLeakSuspension">Oil Leak in Suspension</label>
+                <select id="oilLeakSuspension" name="oilLeakSuspension" required>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brakeFluidLevel">Brake Fluid Level</label>
+                <select id="brakeFluidLevel" name="brakeFluidLevel" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brakeConditionFront">Brake Condition Front</label>
+                <select id="brakeConditionFront" name="brakeConditionFront" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Needs Replacement">Needs Replacement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brakeConditionRear">Brake Condition Rear</label>
+                <select id="brakeConditionRear" name="brakeConditionRear" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Needs Replacement">Needs Replacement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="emergencyBrake">Emergency Brake</label>
+                <select id="emergencyBrake" name="emergencyBrake" required>
+                    <option value="Good">Good</option>
+                    <option value="Ok">Ok</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rustDentDamageEngine">Rust/Dent/Damage Engine</label>
+                <select id="rustDentDamageEngine" name="rustDentDamageEngine" required>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="engineOilCondition">Engine Oil Condition</label>
+                <select id="engineOilCondition" name="engineOilCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Bad">Bad</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="engineOilColor">Engine Oil Color</label>
+                <input type="text" id="engineOilColor" name="engineOilColor" required>
+            </div>
+            <div class="form-group">
+                <label for="brakeFluidCondition">Brake Fluid Condition</label>
+                <select id="brakeFluidCondition" name="brakeFluidCondition" required>
+                    <option value="Good">Good</option>
+                    <option value="Bad">Bad</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brakeFluidColor">Brake Fluid Color</label>
+                <input type="text" id="brakeFluidColor" name="brakeFluidColor" required>
+            </div>
+            <div class="form-group">
+                <label for="oilLeakEngine">Oil Leak in Engine</label>
+                <select id="oilLeakEngine" name="oilLeakEngine" required>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="submitForm()">Predict Costing</button>
+            </div>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        function submitForm() {
+            const form = document.getElementById('predictionForm');
+            const formData = new FormData(form);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerText = `Predicted Costing: ₹${data.costing.toFixed(2)}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
